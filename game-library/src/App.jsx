@@ -6,8 +6,13 @@ import Search from './Components/Search';
 
 
 const App = () => {
+  
 
   const [isSearching, setIsSearching] = useState('');
+  const [ gameList, setGameList] = useState([]);
+
+  
+
 
   return(
     <main>
