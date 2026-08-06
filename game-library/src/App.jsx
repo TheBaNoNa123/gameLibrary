@@ -17,8 +17,9 @@ const App = () => {
        
 
         <section className="allGames">
-
-
+          <ul>
+            
+          </ul>
         </section>
 
       </div>
