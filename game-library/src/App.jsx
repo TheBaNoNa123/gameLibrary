@@ -3,14 +3,10 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import NavBar from './Components/NavBar';
 import Search from './Components/Search';
+import GameCard from './Components/GameCard';
 
 const serverURL = "http://localhost:8080/server/games";
-const GET = {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/json"
-  }
-}
+
 
 const App = () => {
 
@@ -24,17 +20,10 @@ const App = () => {
     const response = await fetch(serverURL);
     const games = await response.json();
     console.log(games);
+    setGameList(games || []);
   } 
   fetchGames();
   }, []);
-  
-  
-
-  
-  
-  
-
-
   
   
 
@@ -46,7 +35,11 @@ const App = () => {
        
 
         <section className="allGames">
+          
           <ul>
+            {gameList.map((game) => (
+              <GameCard key={game.id} game={game} />
+            ))}
             
           </ul>
         </section>
