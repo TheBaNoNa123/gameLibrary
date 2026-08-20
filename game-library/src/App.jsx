@@ -33,14 +33,11 @@ const App = () => {
         <NavBar />
         <Search />
        
-
-        <section className="allGames">
-          
-          <ul>
+        <section>
+          <ul className="allGames">
             {gameList.map((game) => (
               <GameCard key={game.id} game={game} />
-            ))}
-            
+            ))}            
           </ul>
         </section>
 

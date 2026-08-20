@@ -33,5 +33,20 @@
      
 }
 
+.allGames{
+    border-style: solid;
+    border-color: red;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding-left: 13rem;
+}
+
+.gameImg{
+    border-style: solid;
+    border-color: blue;
+    height: 200px;
+    
+}
+
 
 
