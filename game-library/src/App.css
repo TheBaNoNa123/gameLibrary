@@ -1,5 +1,8 @@
+html{
+    background-image: linear-gradient(to bottom, black, gray, black)
+}
+
 .navBar{
-    background-color: black;
     display: flex;
     align-items: center;
     width: 100%;
@@ -20,9 +23,22 @@
     color: hsl(0, 100%, 25%);
 }
 
+.navProfileBut{
+   border: none;
+   padding: 15px;
+   border-radius: 20px;
+   cursor: pointer;
+   padding: 25px 25px;
+}
+
+.navProfileBut:active{
+    filter:brightness(50%);
+}
+
 .navBut-Mid{
     margin: 0 auto;
 }
+
 
 .searchBar{
     display: flex;
@@ -38,7 +54,6 @@
     border-color: red;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    padding-left: 13rem;
 }
 
 .gameImg{
@@ -47,6 +62,11 @@
     height: 200px;
     
 }
+
+.profileLogo{
+    height: 2.5rem;
+}
+
 
 
 
