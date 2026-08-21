@@ -3,10 +3,7 @@ package com.gameLibrary.Server;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,4 +29,12 @@ public class Controller {
     public List<gamesDTO> getGames(){
         return game.gamesData();
     }
+
+    @PostMapping("/register")
+    public void register(@RequestBody RegisterDTO registerRequest){
+
+    }
+
+    @PostMapping("/login")
+    public void login(@RequestBody LoginDTO loginRequest){}
 }
