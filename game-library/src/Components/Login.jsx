@@ -7,7 +7,7 @@ const Login = () => {
 
     const url = "https"
 
-    const handleLogin = async((e) =>{
+    const handleLogin = async(e) =>{
         e.preventDefault();
 
         const sendLogin = await fetch(url, {
@@ -22,7 +22,7 @@ const Login = () => {
                 
             
         }) 
-    })
+    }
 
 
   return (
