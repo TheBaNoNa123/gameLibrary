@@ -21,6 +21,9 @@ const Register = () => {
             })
     
         })
+        if(Response.ok){
+            console.log("Register successful")
+        }
     }
 
   return (

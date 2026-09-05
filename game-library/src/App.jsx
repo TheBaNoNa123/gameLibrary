@@ -4,6 +4,7 @@ import './App.css'
 import NavBar from './Components/NavBar';
 import Search from './Components/Search';
 import GameCard from './Components/GameCard';
+import Register from './Components/Register';
 
 const serverURL = "http://localhost:8080/server/games";
 
@@ -31,6 +32,7 @@ const App = () => {
     <main>
       <div className="wrapper">
         <NavBar />
+        <Register />
         <Search />
        
         <section>
