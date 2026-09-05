@@ -22,6 +22,7 @@ public class TwitchToken {
 
     private Instant expiresAt;
 
+
     public String twitchToken(){
         if(cachedToken != null && Instant.now().isBefore(expiresAt)){
             return cachedToken;

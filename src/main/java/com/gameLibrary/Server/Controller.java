@@ -1,12 +1,10 @@
 package com.gameLibrary.Server;
 
-import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,11 +12,16 @@ import java.util.List;
 @RequestMapping("/server")
 public class Controller {
 
+    private final JwtService jwtService;
+    private final AuthenticationManager authManager;
+    private final registerUser registerUser;
     private final TwitchToken tokenService;
-
     private final gameData game;
 
-    public Controller(TwitchToken tokenService, gameData game){
+    public Controller(JwtService jwtService, AuthenticationManager authManager, TwitchToken tokenService, gameData game, registerUser registerUser){
+        this.jwtService = jwtService;
+        this.authManager = authManager;
+        this.registerUser = registerUser;
         this.tokenService = tokenService;
         this.game = game;
     }
@@ -31,5 +34,21 @@ public class Controller {
     @GetMapping("/games")
     public List<gamesDTO> getGames(){
         return game.gamesData();
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@RequestBody RegisterDTO registerRequest){
+        registerUser.register(registerRequest.getUsername(), registerRequest.getPassword());
+
+        return ResponseEntity.ok("Register successful.");
+    }
+
+    @PostMapping("/login")
+    public void login(@RequestBody LoginDTO loginRequest){
+        authManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
+        );
+
+        String jwt = jwtService.generateToken(loginRequest.getUsername(), "USER");
     }
 }

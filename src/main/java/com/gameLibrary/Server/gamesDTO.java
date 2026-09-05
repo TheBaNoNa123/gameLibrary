@@ -1,9 +1,6 @@
 package com.gameLibrary.Server;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
-
-import java.util.List;
 
 public class gamesDTO {
 
