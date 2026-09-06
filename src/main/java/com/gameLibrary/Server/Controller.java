@@ -7,6 +7,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController()
 @RequestMapping("/server")
@@ -44,11 +45,13 @@ public class Controller {
     }
 
     @PostMapping("/login")
-    public void login(@RequestBody LoginDTO loginRequest){
+    public ResponseEntity<?> login(@RequestBody LoginDTO loginRequest){
         authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
         );
 
         String jwt = jwtService.generateToken(loginRequest.getUsername(), "USER");
+
+        return ResponseEntity.ok(Map.of("token", jwt));
     }
 }

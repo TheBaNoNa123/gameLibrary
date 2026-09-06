@@ -5,12 +5,12 @@ const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const url = "https"
+    const loginEndPoint = "http://localhost:8080/server/login";
 
     const handleLogin = async(e) =>{
         e.preventDefault();
 
-        const sendLogin = await fetch(url, {
+        const sendLogin = await fetch(loginEndPoint, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -21,13 +21,17 @@ const Login = () => {
             })
                 
             
-        }) 
+        })
+        
+        const token = await sendLogin.json();
+
+        console.log(JSON.stringify(token));
     }
 
 
   return (
     <div>
-        <form action="onSubmit">
+        <form onSubmit={handleLogin}>
             <h1>Login</h1>
             <h3>Enter Username: </h3>
             <input value={username} onChange={(e) => setUsername(e.target.value)} />
@@ -35,9 +39,9 @@ const Login = () => {
             <br/>
 
             <h3>Enter Password: </h3>
-            <input value={password} onChange={(e) => setPassword(e.target.value)}/>
+            <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" />
 
-            <button type="submit">Submit</button>
+            <button type="submit" >Submit</button>
         </form>
     </div>
   )
