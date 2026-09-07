@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
-
+import { Navigate, useNavigate } from 'react-router-dom';
 const Login = () => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     const loginEndPoint = "http://localhost:8080/server/login";
+    const navigate = useNavigate();
 
-    const handleLogin = async(e) =>{
+    const handleLogin = async(e) => {
         e.preventDefault();
 
         const sendLogin = await fetch(loginEndPoint, {
@@ -22,10 +23,15 @@ const Login = () => {
                 
             
         })
+        if(!sendLogin.ok){
+            console.log(`HTTP ERROR: STATUS ${sendLogin.status}`);
+            return;
+        }
         
         const token = await sendLogin.json();
 
         console.log(JSON.stringify(token));
+        navigate("/");
     }
 
 

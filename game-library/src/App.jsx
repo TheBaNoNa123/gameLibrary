@@ -32,7 +32,6 @@ const App = () => {
     <main>
       <div className="wrapper">
         <NavBar />
-        <Register />
         <Search />
        
         <section>
