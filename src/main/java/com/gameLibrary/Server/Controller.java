@@ -32,19 +32,19 @@ public class Controller {
         return tokenService.twitchToken();
     }
 
-    @GetMapping("/games")
+    @GetMapping("/auth/games")
     public List<gamesDTO> getGames(){
         return game.gamesData();
     }
 
-    @PostMapping("/register")
+    @PostMapping("/public/register")
     public ResponseEntity<String> register(@RequestBody RegisterDTO registerRequest){
         registerUser.register(registerRequest.getUsername(), registerRequest.getPassword());
 
         return ResponseEntity.ok("Register successful.");
     }
 
-    @PostMapping("/login")
+    @PostMapping("/public/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO loginRequest){
         authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())

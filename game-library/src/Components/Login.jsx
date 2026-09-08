@@ -5,7 +5,7 @@ const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const loginEndPoint = "http://localhost:8080/server/login";
+    const loginEndPoint = "http://localhost:8080/server/public/login";
     const navigate = useNavigate();
 
     const handleLogin = async(e) => {
@@ -29,7 +29,7 @@ const Login = () => {
         }
         
         const token = await sendLogin.json();
-        localStorage.setItem("token", JSON.stringify(token));
+        localStorage.setItem("token", token.token);
         navigate("/");
     }
 

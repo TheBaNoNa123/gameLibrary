@@ -6,7 +6,7 @@ import Search from './Components/Search';
 import GameCard from './Components/GameCard';
 import Register from './Components/Register';
 
-const serverURL = "http://localhost:8080/server/games";
+const serverURL = "http://localhost:8080/server/auth/games";
 
 
 const App = () => {
@@ -16,17 +16,23 @@ const App = () => {
   const [isSearching, setIsSearching] = useState('');
   const [gameList, setGameList] = useState([]);
 
-  const token = localStorage.getItem("token");
 
   useEffect(() => {
     async function fetchGames(){
+    const token = localStorage.getItem("token");
+
     const response = await fetch(serverURL,{
       headers: {
         "Authorization": `Bearer ${token}`
       }
     });
+    if(!response.ok){
+      console.log(`STATUS ERROR ${response.status}`);
+      return;
+    }
+
+
     const games = await response.json();
-    console.log(games);
     setGameList(games || []);
   } 
   fetchGames();

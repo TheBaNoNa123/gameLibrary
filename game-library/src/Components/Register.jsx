@@ -5,7 +5,7 @@ const Register = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const registerEndPoint = "http://localhost:8080/server/register";
+    const registerEndPoint = "http://localhost:8080/server/public/register";
 
     const handleRegister = async(e) => {
         e.preventDefault();
