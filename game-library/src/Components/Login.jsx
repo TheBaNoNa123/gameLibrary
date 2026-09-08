@@ -29,8 +29,7 @@ const Login = () => {
         }
         
         const token = await sendLogin.json();
-
-        console.log(JSON.stringify(token));
+        localStorage.setItem("token", JSON.stringify(token));
         navigate("/");
     }
 

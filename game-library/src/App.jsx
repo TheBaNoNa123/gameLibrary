@@ -16,9 +16,15 @@ const App = () => {
   const [isSearching, setIsSearching] = useState('');
   const [gameList, setGameList] = useState([]);
 
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
     async function fetchGames(){
-    const response = await fetch(serverURL);
+    const response = await fetch(serverURL,{
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    });
     const games = await response.json();
     console.log(games);
     setGameList(games || []);
