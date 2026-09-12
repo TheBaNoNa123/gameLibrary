@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import NavBar from './Components/NavBar';
 import Search from './Components/Search';
-import GameCard from './Components/GameCard';
+import GameCard from './Components/gameCard';
 import Register from './Components/Register';
 import { Navigate } from 'react-router-dom';
 
@@ -16,15 +16,17 @@ const App = () => {
   const [authFailed, setAuthFailed] = useState(false);
 
   useEffect(() => {
+
+  
     async function fetchGames(){
     const token = localStorage.getItem("token");
 
-    const response = await fetch(serverURL,{
+    const response = await fetch(`${serverURL}?query=${isSearching}`,{
       headers: {
         "Authorization": `Bearer ${token}`
       }
     })
-    if(!response.ok){
+    if(response.status === 401){
       localStorage.removeItem("token");
       console.log(`Status Error ${response.status}`)
       setAuthFailed(true);
@@ -33,10 +35,11 @@ const App = () => {
 
     const games = await response.json();
     setGameList(games || []);
+    console.log(JSON.stringify(games));
 
   } 
-  fetchGames();
-  }, []);
+  fetchGames(isSearching);
+  }, [isSearching]);
 
   if(authFailed){
       return <Navigate to="/Login" replace />
@@ -49,7 +52,7 @@ const App = () => {
     <main>
       <div className="wrapper">
         <NavBar />
-        <Search />
+        <Search isSearching={isSearching} setIsSearching={setIsSearching}/>
        
         <section>
           <ul className="allGames">

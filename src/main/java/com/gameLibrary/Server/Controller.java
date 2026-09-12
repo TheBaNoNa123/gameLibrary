@@ -33,8 +33,8 @@ public class Controller {
     }
 
     @GetMapping("/auth/games")
-    public List<gamesDTO> getGames(){
-        return game.gamesData();
+    public List<gamesDTO> getGames(@RequestParam String query){
+        return game.gamesData(query);
     }
 
     @PostMapping("/public/register")

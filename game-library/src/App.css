@@ -63,6 +63,10 @@ html{
     
 }
 
+.text{
+    color: white;
+}
+
 .profileLogo{
     height: 2.5rem;
 }

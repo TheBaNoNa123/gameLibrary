@@ -15,18 +15,14 @@ public class gameData {
     @Value("${twitch.client_id}")
     private String clientId;
 
-
     TwitchToken cachedToken;
-
-
 
     public gameData(TwitchToken cachedToken) {
         this.cachedToken = cachedToken;
     }
 
-    public List<gamesDTO> gamesData(){
+    public List<gamesDTO> gamesData(String query){
         String token = cachedToken.twitchToken();
-
 
         String url = UriComponentsBuilder.fromUriString("https://api.igdb.com/v4/games")
                 .toUriString();
@@ -35,14 +31,13 @@ public class gameData {
                 .uri(url)
                 .header("Client-ID", clientId)
                 .header("Authorization", "Bearer " + token)
-                .body("fields name, cover.url, total_rating, total_rating_count;" +
-                        "sort total_rating desc; sort total_rating_count desc; " +
+                .body(  "search \"" + query + "\";" +
+                        "fields id, name, cover.url, total_rating, total_rating_count;" +
+                        "where game_type = 0 & version_parent = null;" +
                         " limit 12;")
                 .retrieve()
                 .body(new ParameterizedTypeReference<List<gamesDTO>>() {
                 });
-
-
 
         return response;
     }
