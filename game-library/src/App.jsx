@@ -32,6 +32,10 @@ const App = () => {
       setAuthFailed(true);
       return ;
     }
+    if(!response.ok){
+      alert(`Status Error: ${response.status}`);
+      return;
+    }
 
     const games = await response.json();
     setGameList(games || []);
