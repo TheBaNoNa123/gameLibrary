@@ -5,7 +5,7 @@ const GameCard = ({game = {}}) => {
   const [ save, setSave ] = useState(false);
 
   const token = localStorage.getItem("token");
-  const serverURL = "URL";
+  const serverURL = "http://localhost:8080/server/auth/savedGame";
 
   const {name, total_rating, total_rating_count, cover} = game || {};
   const url = cover?.url;
@@ -15,10 +15,11 @@ const GameCard = ({game = {}}) => {
      e.preventDefault();
     const data = await fetch(serverURL,{
       method: "POST",
-      headers: {"Authorization": `Bearer ${token}`},
+      headers: {"Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"},
       body: JSON.stringify({
         "name": name,
-        "url": cover
+        "cover": gameCover
       })
     })    
   }
