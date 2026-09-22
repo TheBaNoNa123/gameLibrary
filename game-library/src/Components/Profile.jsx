@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import GameCard from './gameCard';
-
+import { useState, useEffect } from 'react'
+import ProfileGameCard from './profileGameCard';
 const Profile = () => {
     const token = localStorage.getItem("token");
     const url = "http://localhost:8080/server/auth/userProfileGames";
@@ -22,10 +21,10 @@ const Profile = () => {
 
   return (
     <div>
-      <h1>Your Games</h1>
+      <h1 className="text">Your Games</h1>
       <ul className="allGames">
         {games.map((game) => (
-            <p>{game.name}</p>
+          <ProfileGameCard game={game}/>
         ))}
         </ul>
     </div>
