@@ -32,14 +32,19 @@ public class Controller {
         this.game = game;
     }
 
-    @GetMapping("/token")
-    public String getToken(){
-        return tokenService.twitchToken();
-    }
-
     @GetMapping("/auth/games")
     public List<gamesDTO> getGames(@RequestParam String query){
         return game.gamesData(query);
+    }
+
+    @GetMapping("/auth/userProfileGames")
+    public List<UserGamesDTO> getUserGames(Authentication authentication){
+        String username = authentication.getName();
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        return userGamesRepository.findByUser(user).stream()
+                .map(game -> new UserGamesDTO(game.getName(), game.getCover()))
+                .toList();
     }
 
     @PostMapping("/auth/savedGame")

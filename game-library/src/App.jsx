@@ -4,21 +4,15 @@ import './App.css'
 import NavBar from './Components/NavBar';
 import Search from './Components/Search';
 import GameCard from './Components/gameCard';
-import Register from './Components/Register';
 import { Navigate } from 'react-router-dom';
-import debounce from 'lodash/debounce';
-import { useMemo } from 'react';
 
 const serverURL = "http://localhost:8080/server/auth/games";
 
 const App = () => {
 
-  const [ debounceSearch, setDebounceSearch] = useState('');
   const [isSearching, setIsSearching] = useState('');
   const [gameList, setGameList] = useState([]);
   const [authFailed, setAuthFailed] = useState(false);
-
-  const db = useMemo(() => debounce((value) => setDebounceSearch(value), 300), [])
 
   useEffect(() => {
     const searchTime = setTimeout(() => {
