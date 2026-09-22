@@ -2,11 +2,11 @@
 A full-stack web app for searching through a huge catalogue of games. Search for old or upcoming games and get live results including cover art, rating, and rating counts pulled from IGDB.
 
 // Current Features // 
-- Live game search with debounced input (no lag, no spamming the API)
+- Live game search with debounced input
 - User registration and login
 - JWT-based authentication — stateless, HMAC-signed tokens
 - Automatic logout when a session token expires
-- Game data (cover, rating, rating count) pulled from the IGDB API
+- Game data pulled from the IGDB API
 
 
 // How It Works //
