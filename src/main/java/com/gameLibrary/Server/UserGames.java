@@ -1,11 +1,12 @@
 package com.gameLibrary.Server;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "user_games")
+@Table(name = "user_profile")
 public class UserGames {
 
     @Id
@@ -18,4 +19,7 @@ public class UserGames {
 
     private String name;
     private String cover;
+    @Nullable
+    private Integer rating;
+    private String review;
 }

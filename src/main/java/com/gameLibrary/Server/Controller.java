@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController()
 @RequestMapping("/server")
@@ -43,7 +44,8 @@ public class Controller {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         return userGamesRepository.findByUser(user).stream()
-                .map(game -> new UserGamesDTO(game.getName(), game.getCover()))
+                .map(game -> new UserGamesDTO(game.getName(), game.getCover(), game.getRating(),
+                        game.getReview()))
                 .toList();
     }
 
@@ -53,11 +55,23 @@ public class Controller {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         UserGames userGames = new UserGames();
-
         userGames.setUser(user);
-        userGames.setName(savedGame.getName());
-        userGames.setCover(savedGame.getCover());
-        userGamesRepository.save(userGames);
+
+        if(!userGamesRepository.existsByNameAndUser(savedGame.getName(), user)){
+            userGames.setName(savedGame.getName());
+            userGames.setCover(savedGame.getCover());
+            userGamesRepository.save(userGames);
+        }
+
+        Optional<UserGames> result = userGamesRepository.findByUserAndName(user, savedGame.getName());
+        if(result.isPresent()){
+            userGames = result.get();
+            System.out.println(savedGame.getRating());
+            System.out.println(savedGame.getReview());
+            userGames.setRating(savedGame.getRating());
+            userGames.setReview(savedGame.getReview());
+            userGamesRepository.save(userGames);
+        }
 
     }
 

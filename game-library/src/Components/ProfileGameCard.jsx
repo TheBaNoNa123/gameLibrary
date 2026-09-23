@@ -1,25 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
-const ProfileGameCard = ({game: {name, cover}}) => {
+const ProfileGameCard = ({game: {name, cover, rating, review}}) => {
   const token = localStorage.getItem("token");
-  const url = "http://localhost:8080/server/";
+  const url = "http://localhost:8080/server/auth/savedGame";
 
-  const [ userRating, setUserRating ] = useState("");
-  const [ userReview, setUserReview ] = useState("");
+  const [ userRating, setUserRating ] = useState(rating);
+  const [ userReview, setUserReview ] = useState(review);
 
-  const reviewHandler = async() => {
+  
+
+  const reviewHandler = async(e) => {
+    e.preventDefault();
     
-
     const sendReview = await fetch(url, {
       method: "POST",
       headers:{"Authorization" : `Bearer ${token}`,
     "Content-Type": "application/json"},
       body: JSON.stringify({
+      name : name,  
       rating : userRating,
       review : userReview
     })
     })
-
   }
 
   return (
@@ -30,13 +32,20 @@ const ProfileGameCard = ({game: {name, cover}}) => {
           <p className="text">Personal Rating: </p>
           <input type="text" value={userRating} 
           onChange={(e) => setUserRating(e.target.value)}></input>
+
+          
           
           <br/>
 
           <p className="text">Personal Review: </p>
           <input type="text" value={userReview} 
           onChange={(e) => setUserReview(e.target.value)}></input>
+
+          <br/>
+
+          <button type="submit">Save</button>
         </form>
+        
     </div>
   )
 }

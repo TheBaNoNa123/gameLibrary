@@ -6,4 +6,6 @@ import lombok.Data;
 public class SaveGameDTO {
     private String name;
     private String cover;
+    private Integer rating;
+    private String review;
 }

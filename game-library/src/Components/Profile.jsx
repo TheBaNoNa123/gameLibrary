@@ -18,6 +18,7 @@ const Profile = () => {
     }
     fetchGames();
     }, []);
+    console.log(games);
 
   return (
     <div>

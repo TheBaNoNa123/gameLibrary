@@ -18,8 +18,8 @@ const GameCard = ({game = {}}) => {
       headers: {"Authorization": `Bearer ${token}`,
                 "Content-Type": "application/json"},
       body: JSON.stringify({
-        "name": name,
-        "cover": gameCover
+        name: name,
+        cover: gameCover
       })
     })    
   }

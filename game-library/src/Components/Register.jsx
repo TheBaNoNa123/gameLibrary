@@ -21,7 +21,7 @@ const Register = () => {
             })
     
         })
-        if(Response.ok){
+        if(sendData.ok){
             console.log("Register successful")
         }
     }
