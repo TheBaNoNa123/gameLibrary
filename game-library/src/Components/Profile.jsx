@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import ProfileGameCard from './profileGameCard';
+import NavBar from './NavBar';
 const Profile = () => {
     const token = localStorage.getItem("token");
     const url = "http://localhost:8080/server/auth/userProfileGames";
@@ -22,6 +23,7 @@ const Profile = () => {
 
   return (
     <div>
+      <NavBar />
       <h1 className="text">Your Games</h1>
       <ul className="allGames">
         {games.map((game) => (

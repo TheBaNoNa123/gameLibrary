@@ -8,10 +8,14 @@ const NavBar = () => {
   const goToProfile = () => {
     navigate("/Profile")
   }
+  const goToHome = ()=> {
+    navigate("/")
+  }
+
   return (
     <header>
         <nav className="navBar">
-          <button className="navBut navBut-Mid">Search</button>
+          <button className="navBut navBut-Mid" onClick={goToHome}>Search</button>
           <button className="navProfileBut" onClick={goToProfile}>
             <img src={profile_logo} alt="profile_logo" className="profileLogo" />
           </button>
