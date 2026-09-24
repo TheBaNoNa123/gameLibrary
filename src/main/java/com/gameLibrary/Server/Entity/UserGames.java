@@ -1,4 +1,4 @@
-package com.gameLibrary.Server;
+package com.gameLibrary.Server.Entity;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;

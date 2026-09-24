@@ -1,5 +1,7 @@
-package com.gameLibrary.Server;
+package com.gameLibrary.Server.Repository;
 
+import com.gameLibrary.Server.Entity.User;
+import com.gameLibrary.Server.Entity.UserGames;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

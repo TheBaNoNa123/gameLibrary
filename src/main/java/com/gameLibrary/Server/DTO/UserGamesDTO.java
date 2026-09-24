@@ -1,4 +1,4 @@
-package com.gameLibrary.Server;
+package com.gameLibrary.Server.DTO;
 
 import lombok.Data;
 
