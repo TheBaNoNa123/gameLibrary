@@ -3,6 +3,7 @@ import { useState } from 'react';
 const ProfileGameCard = ({game: {name, cover, rating, review}}) => {
   const token = localStorage.getItem("token");
   const url = "http://localhost:8080/server/auth/savedGame";
+  const deleteURL = "http://localhost:8080/server/auth/deleteGame";
 
   const [ userRating, setUserRating ] = useState(rating);
   const [ userReview, setUserReview ] = useState(review);
@@ -24,8 +25,23 @@ const ProfileGameCard = ({game: {name, cover, rating, review}}) => {
     })
   }
 
+  const deleteHandler = async() => {
+
+    const sendDelete = await fetch(`${deleteURL}?gameName=${name}`,{
+      method: "DELETE",
+      headers: {"Authorization" : `Bearer ${token}`}
+  })
+    const response = sendDelete.response();
+
+    if(response.ok){
+      console.log(`${name} has been deleted.`);
+    }
+
+  }
+
   return (
     <div>
+      <button onClick={deleteHandler}></button>
       <h3 className="text">{name}</h3>
         <img src={cover} alt= {`${name} Cover image`} className="gameImg text"/>
         <form onSubmit={reviewHandler}>

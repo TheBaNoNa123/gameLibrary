@@ -92,4 +92,21 @@ public class Controller {
 
         return ResponseEntity.ok(Map.of("token", jwt));
     }
+
+    @DeleteMapping("/auth/deleteGame")
+    public void deleteGame(@RequestParam String gameName, Authentication authentication){
+        String username = authentication.getName();
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        UserGames userGames = new UserGames();
+        userGames.setUser(user);
+
+        Optional<UserGames> result = userGamesRepository.findByUserAndName(user, gameName);
+        if(result.isPresent()){
+            userGames = result.get();
+            userGamesRepository.delete(userGames);
+        }
+
+
+    }
 }
