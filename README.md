@@ -10,14 +10,10 @@ A full-stack web app for searching through a huge catalogue of games. Search for
 
 
 // How It Works //
-- User registers/logs in, backend hashes the password with BCrypt and 
-   issues a signed JWT on successful login.
-- The frontend stores the token and attaches it to future requests.
-- Searching debounces user input, then calls the backend, which fetches 
-   a cached Twitch OAuth token and queries IGDB for matching games.
-- Results render as cards with cover art, rating, and rating count.
-
-// Planned Features //
-- Profile system to save added games to your profile library.
-- Can rate the games and write a description below them and delete games from profile as well.
+- User registers to create acccount / logs in, backend hashes the password with BCrypt and issues a signed JWT on a successful login
+- The frontend stores the token and attaches it to future requests
+- Searching debounces user input, then calls the backend, which fetches a cached Twitch OAuth token and queries IGDB for matching games
+- Results render as cards with cover art, rating, and rating count
+- Profile system to save added games to your profile library
+- Can rate the games and write a description below them, which are then saved, and delete games from profile as well
 
